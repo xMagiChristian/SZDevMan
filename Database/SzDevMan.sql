@@ -1,10 +1,8 @@
 DROP DATABASE IF EXISTS SzDevMan;
 CREATE DATABASE SzDevMan;
+USE SzDevMan;
 
-show databases;
-use SzDevMan;
-
-drop table if exists Device; 
+DROP TABLE IF EXISTS Device; 
 CREATE TABLE Device(
     DeviceId INT AUTO_INCREMENT,
     Type VARCHAR(255),
@@ -20,9 +18,8 @@ CREATE TABLE Device(
     InventoryId VARCHAR(255),
     PRIMARY KEY (DeviceId)
 );
-insert into Device (type, Manufacturer, DeviceName, DeviceVersion, DeviceSerialNumber, YearOfProduction) VALUES ('PC', 'Asus', 'PC1', '1.0', '1234', 2002);
 
-drop table if exists Service; 
+DROP TABLE IF EXISTS Service; 
 CREATE TABLE Service(
     ServiceId INT AUTO_INCREMENT,
     Type VARCHAR(255),
@@ -34,7 +31,7 @@ CREATE TABLE Service(
     PRIMARY KEY (ServiceId)
 );
 
-drop table if exists Software; 
+DROP TABLE IF EXISTS Software; 
 CREATE TABLE Software(
     SoftwareId INT AUTO_INCREMENT,
     Type VARCHAR(255),
@@ -45,14 +42,22 @@ CREATE TABLE Software(
     PRIMARY KEY (SoftwareId),
     CONSTRAINT fk_SoftwareDevice FOREIGN KEY (HardwareId) REFERENCES Device(DeviceId) ON UPDATE CASCADE ON DELETE CASCADE
 );
-insert into Software (type, SoftwareName, SoftwareVersion, SoftwareLicence, HardwareId) VALUES ('SW1', 'Photoshop', '14.1', 'Yes', 1);
-
-
-show tables;
-select * from device;
-select * from Service;
-select * from Software;
 
 
 
+INSERT INTO Device (type, Manufacturer, DeviceName, DeviceVersion, DeviceSerialNumber, YearOfProduction, FirmwareVersion, Location, DateOfPurchase, Warranty, InventoryId) 
+VALUES ('PC', 'Asus', 'PC1', '1.0', '1234', 2002, '1.0', 'Ybbs', CURDATE(), 'Yes', '100');
+INSERT INTO Device (type, Manufacturer, DeviceName, DeviceVersion, DeviceSerialNumber, YearOfProduction, FirmwareVersion, Location, DateOfPurchase, Warranty, InventoryId) 
+VALUES ('PC', 'Asus', 'PC2', '1.0', '1235', 2002, '1.0', 'Ybbs', CURDATE(), 'Yes', '101');
+INSERT INTO Device (type, Manufacturer, DeviceName, DeviceVersion, DeviceSerialNumber, YearOfProduction, FirmwareVersion, Location, DateOfPurchase, Warranty, InventoryId) 
+VALUES ('PC', 'Asus', 'PC3', '1.0', '1236', 2002, '1.0', 'Ybbs', CURDATE(), 'Yes', '102');
+INSERT INTO Device (type, Manufacturer, DeviceName, DeviceVersion, DeviceSerialNumber, YearOfProduction, FirmwareVersion, Location, DateOfPurchase, Warranty, InventoryId) 
+VALUES ('Router', 'Cisco', 'R2', '1.4', '1237', 2000, '1.0', 'Ybbs', CURDATE(), 'Yes', '103');
 
+INSERT INTO Software (type, SoftwareName, SoftwareVersion, SoftwareLicence, HardwareId) VALUES ('SW1', 'Photoshop', '14.1', 'No', 1);
+INSERT INTO Software (type, SoftwareName, SoftwareVersion, SoftwareLicence, HardwareId) VALUES ('SW2', 'XAMPP', '7', 'Yes', 2);
+INSERT INTO Software (type, SoftwareName, SoftwareVersion, SoftwareLicence, HardwareId) VALUES ('SW3', 'Putty', '5', 'Yes', 3);
+
+INSERT INTO Service (type, ServiceName, ServiceVersion, ServiceLicence, ServiceProvider, ServiceAccess) VALUES('Miete', 'Webserver', '1.0', 'No', 'Amazon', 'No');
+INSERT INTO Service (type, ServiceName, ServiceVersion, ServiceLicence, ServiceProvider, ServiceAccess) VALUES('Miete', 'Domain', '1.0', 'No', 'Amazon', 'Yes');
+INSERT INTO Service (type, ServiceName, ServiceVersion, ServiceLicence, ServiceProvider, ServiceAccess) VALUES('Miete', 'Internet', '1.0', 'No', 'Amazon', 'Yes');
